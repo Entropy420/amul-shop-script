@@ -5,6 +5,6 @@ A script that checks availability of products on amul's website
 
 Step 1: edit the config.json file with your pincode and the products you want to track(the links)
 
-Step 2: open it in a code editor and run
+Step 2: open the repo(or not just run in terminal) in a code editor and run
         i) `npm install`
         ii) `npm start`
