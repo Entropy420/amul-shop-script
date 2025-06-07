@@ -1,0 +1,29 @@
+{
+  "pinCode": "110036",
+  "productsLinks": [
+    {
+      "name": "amul-kool",
+      "link": "https://shop.amul.com/en/product/amul-kool-protein-milkshake-or-chocolate-180-ml-or-pack-of-30"
+    },
+    {
+      "name": "protein-paneer",
+      "link": "https://shop.amul.com/en/product/amul-high-protein-paneer-400-g-or-pack-of-24"
+    },
+    {
+      "name": "blue-berry",
+      "link": "https://shop.amul.com/en/product/amul-high-protein-blueberry-shake-200-ml-or-pack-of-30"
+    },
+    {
+      "name": "amul-almond-chocolate",
+      "link": "https://shop.amul.com/en/product/amul-almondo-or-chocolate-coated-almonds-200-g"
+    },
+    {
+      "name": "amul-moong-dal",
+      "link": "https://shop.amul.com/en/product/amul-organic-moong-dal-500-g"
+    },
+    {
+      "name": "amul-protein-milk",
+      "link": "https://shop.amul.com/en/product/amul-high-protein-buttermilk-200-ml-or-pack-of-30"
+    }
+  ]
+}

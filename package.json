@@ -1,0 +1,21 @@
+{
+  "name": "amul_whey_script",
+  "version": "1.0.0",
+  "description": "A Script written in TS that will look for products stock availabilty on amul's online store",
+  "license": "ISC",
+  "author": "Entropy",
+  "type": "commonjs",
+  "main": "AmulWhey.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tsc ./src/AmulWhey.ts --outDir ./dist",
+    "start": "node ./dist/AmulWhey"
+  },
+  "dependencies": {
+    "@playwright/test": "^1.52.0",
+    "playwright": "^1.52.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.30"
+  }
+}
