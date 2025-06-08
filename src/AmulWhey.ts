@@ -1,6 +1,7 @@
 import { chromium } from "@playwright/test";
 import { readFile } from "fs/promises";
 import * as path from "path";
+import * as notifier from "node-notifier";
 
 //Interfaces for the Json obj of config file
 interface Product {
@@ -25,19 +26,17 @@ async function configReader() {
 // fills the pin code, and runs a loop to see if products(from config file) are in stock or not
 (async () => {
   const dataJson: Data = await configReader();
-
   const pinCode = dataJson.pinCode;
   const listOfLinks = dataJson.productsLinks;
 
   const browser = await chromium.launch();
   const page = await browser.newPage();
 
+  const messages: string[] = [];
+
   await page.goto("https://shop.amul.com/en/browse/protein");
-
   await page.locator("#search").fill(pinCode);
-
   await page.locator("#automatic").waitFor({ state: "visible" });
-
   await page.getByRole("button").filter({ hasText: pinCode }).click();
 
   async function checkStock(link: string) {
@@ -56,10 +55,18 @@ async function configReader() {
   // runs the list of links to see stock status
   for (const { name, link } of listOfLinks) {
     if (await checkStock(link)) {
-      console.log(`${name} is IN stock`);
-    } else {
-      console.log(`${name} is NOT in stock`);
+      messages.push(`${name} is IN stock`);
     }
+  }
+
+  if (messages.length != 0) {
+    const msgString = messages.join("\n");
+    notifier.notify({
+      title: "Product Available",
+      message: msgString,
+      sound: true,
+      icon: path.join(__dirname, "..", "Entropy_transparent.png"),
+    });
   }
 
   await browser.close();

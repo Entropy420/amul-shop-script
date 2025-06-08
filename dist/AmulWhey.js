@@ -39,6 +39,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var test_1 = require("@playwright/test");
 var promises_1 = require("fs/promises");
 var path = require("path");
+var notifier = require("node-notifier");
 // reads the config file and return the parsed json(promise)
 function configReader() {
     return __awaiter(this, void 0, void 0, function () {
@@ -77,7 +78,7 @@ function configReader() {
             });
         });
     }
-    var dataJson, pinCode, listOfLinks, browser, page, _i, listOfLinks_1, _a, name_1, link;
+    var dataJson, pinCode, listOfLinks, browser, page, messages, _i, listOfLinks_1, _a, name_1, link, msgString;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0: return [4 /*yield*/, configReader()];
@@ -91,6 +92,7 @@ function configReader() {
                 return [4 /*yield*/, browser.newPage()];
             case 3:
                 page = _b.sent();
+                messages = [];
                 return [4 /*yield*/, page.goto("https://shop.amul.com/en/browse/protein")];
             case 4:
                 _b.sent();
@@ -111,16 +113,23 @@ function configReader() {
                 return [4 /*yield*/, checkStock(link)];
             case 9:
                 if (_b.sent()) {
-                    console.log("".concat(name_1, " is IN stock"));
-                }
-                else {
-                    console.log("".concat(name_1, " is NOT in stock"));
+                    messages.push("".concat(name_1, " is IN stock"));
                 }
                 _b.label = 10;
             case 10:
                 _i++;
                 return [3 /*break*/, 8];
-            case 11: return [4 /*yield*/, browser.close()];
+            case 11:
+                if (messages.length != 0) {
+                    msgString = messages.join("\n");
+                    notifier.notify({
+                        title: "Product Available",
+                        message: msgString,
+                        sound: true,
+                        icon: path.join(__dirname, "..", "Entropy_transparent.png"),
+                    });
+                }
+                return [4 /*yield*/, browser.close()];
             case 12:
                 _b.sent();
                 return [2 /*return*/];
